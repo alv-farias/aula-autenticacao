@@ -17,8 +17,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
-    });
+    })->name('home');
 
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-
+    Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
 });
