@@ -8,8 +8,8 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1>Seja bem vindo, {{Auth::user()->name}}</h1>
-    <h2>Você esta logado com o email: {{ Auth::user()->email }}</h2>
+    <h1 class="text-3xl font-semibold">Seja bem vindo, {{Auth::user()->name}}</h1>
+    <h2 class="font-semibold mb-6">Você esta logado com o email: {{ Auth::user()->email }}</h2>
 
     <a href="{{route('posts.create')}}" class="bg-blue-400 rounded-sm p-2">
         New Post
@@ -19,5 +19,13 @@
         @csrf
         <button type="submit" class="bg-red-600 mt-6 rounded-sm p-2">Logout</button>
     </form>
+
+    <div>
+        @forelse ($posts as $post )
+            <p>{{$post->title}} | {{$post->created_at}}</p>
+        @empty
+            <p>Nenhum Post Cadastrado</p>
+        @endforelse
+    </div>
 </body>
 </html>
