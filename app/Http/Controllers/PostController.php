@@ -53,7 +53,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        return view('posts.edit');
+        $post = Post::find($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -61,7 +62,16 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::find($id);
+
+        $data = $request->validate([
+            'title' => 'required|string|max:100',
+            'content' => 'required|string|min:10'
+        ]);
+
+        $post->update($data);
+
+        return redirect()->route('home');
     }
 
     /**
@@ -69,6 +79,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->route('home');
     }
 }

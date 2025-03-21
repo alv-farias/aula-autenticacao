@@ -22,7 +22,13 @@
 
     <div>
         @forelse ($posts as $post )
-            <p>{{$post->title}} | {{$post->created_at}}</p>
+            <p>{{$post->title}} | <a href="{{route('posts.show', $post->id)}}">Detalhes</a></p>
+
+            <form action="{{route('posts.delete', $post->id)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Apagar" class="bg-red-500 p-2 text-white">
+            </form>
         @empty
             <p>Nenhum Post Cadastrado</p>
         @endforelse

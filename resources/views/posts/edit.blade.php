@@ -13,14 +13,17 @@
     </a>
     <h1>Edit your Post</h1>
 
-    <form action="{{route('posts.store')}}" method="post">
+    <form action="{{route('posts.update', $post->id)}}" method="post">
         @csrf
+        @method('PUT')
         <div class="flex flex-col gap-2 p-6">
             <label for="title">Title:</label>
-            <input type="text" name="title" id="title" class="border border-black">
+            <input type="text" value="{{$post->title}}" name="title" id="title" class="border border-black">
 
             <label for="contet">Content:</label>
-            <textarea class="border border-black" name="content" id="content" cols="30" rows="10" placeholder="Write your post..."></textarea>
+            <textarea class="border border-black" name="content" id="content" cols="30" rows="10" placeholder="Write your post...">
+                {{$post->content}}
+            </textarea>
 
             <input type="submit" class="bg-blue-400 w-1/4 rounded-sm p-2" value="Create">
         </div>
